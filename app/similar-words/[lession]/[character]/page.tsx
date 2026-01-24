@@ -5,6 +5,8 @@ import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
 
+export const runtime = 'edge'
+
 export default async function Page({
   params,
 }: {
