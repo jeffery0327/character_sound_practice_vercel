@@ -97,7 +97,7 @@ const mark: AnnotationHandler = {
 };
 
 async function MyCode({ codeblock }: { codeblock: RawCode }) {
-  'use cache';
+  // 'use cache';
 
   const highlighted = await highlight(codeblock, 'github-dark');
   const { background, ...style } = highlighted.style;
@@ -123,7 +123,7 @@ async function MyCode({ codeblock }: { codeblock: RawCode }) {
 }
 
 async function MyInlineCode({ codeblock }: { codeblock: RawCode }) {
-  'use cache';
+  // 'use cache';
 
   const highlighted = await highlight(codeblock, 'github-dark');
   return <Inline code={highlighted} style={highlighted.style} />;

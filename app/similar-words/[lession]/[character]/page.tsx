@@ -1,5 +1,3 @@
-// 'use cache';
-
 import { notFound } from 'next/navigation';
 import { Boundary } from '@/ui/boundary';
 import { data, Lession, Character, Sound } from '@/app/_internal/data'

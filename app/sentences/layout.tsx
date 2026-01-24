@@ -1,4 +1,4 @@
-'use cache';
+// 'use cache';
 
 import React from 'react';
 import { Boundary } from '@/ui/boundary';

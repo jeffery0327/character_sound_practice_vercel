@@ -1,4 +1,4 @@
-'use cache';
+// 'use cache';
 
 import { notFound } from 'next/navigation';
 import { data, SentenceLession, Character, Sound, Sentence } from '@/app/_internal/data'

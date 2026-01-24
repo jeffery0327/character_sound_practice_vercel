@@ -1,4 +1,4 @@
-'use cache';
+// 'use cache';
 
 import { Boundary } from '@/ui/boundary';
 import Link from 'next/link';
