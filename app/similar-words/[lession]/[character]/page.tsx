@@ -8,7 +8,7 @@ export function generateStaticParams() {
   return data.character_learning_lessions.flatMap(lession =>
     lession.characters.map(character => ({
       lession: lession.slug,
-      character: character.character
+      character: character.id
     }))
   );
 }
