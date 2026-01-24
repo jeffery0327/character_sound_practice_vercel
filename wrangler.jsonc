@@ -1,0 +1,5 @@
+{
+	"name": "next-starter-template",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2026-01-24"
+}
