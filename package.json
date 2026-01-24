@@ -7,13 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.1.3",
+    "@opennextjs/cloudflare": "^1.15.1",
     "clsx": "^2.1.1",
     "codehike": "^1.0.7",
     "mdx": "^0.2.3",
@@ -21,7 +23,8 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "recma-codehike": "^0.0.1",
-    "remark-codehike": "^0.0.1"
+    "remark-codehike": "^0.0.1",
+    "wrangler": "^4.60.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.11",
