@@ -1,11 +1,17 @@
 import { notFound } from 'next/navigation';
-import { Boundary } from '@/ui/boundary';
 import { data, Lession, Character, Sound } from '@/app/_internal/data'
 import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
 
-export const runtime = 'edge'
+export function generateStaticParams() {
+  return data.character_learning_lessions.flatMap(lession =>
+    lession.characters.map(character => ({
+      lession: lession.slug,
+      character: character.character
+    }))
+  );
+}
 
 export default async function Page({
   params,

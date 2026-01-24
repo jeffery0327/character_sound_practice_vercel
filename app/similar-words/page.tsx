@@ -6,8 +6,6 @@ import { LinkStatus } from '@/ui/link-status'
 import { data } from '@/app/_internal/data'
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
 
-export const runtime = 'edge'
-
 export default async function Page() {
 
   return (

@@ -4,7 +4,9 @@ import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
 
-export const runtime = 'edge'
+export async function generateStaticParams() {
+  return data.character_learning_lessions.map(({ slug }) => ({ lession: slug }));
+}
 
 export default async function Page({
   params,

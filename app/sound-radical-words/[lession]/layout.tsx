@@ -13,7 +13,6 @@ export default async function Layout({
   params: Promise<{ lession: string }>;
 }) {
   const { lession: lessionSlug } = await params;
-  console.log(lessionSlug)
   const lession: Lession | undefined = data.character_learning_lessions.find(r => r.slug === lessionSlug)
 
   if (!lession) {

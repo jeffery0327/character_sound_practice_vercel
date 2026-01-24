@@ -6,13 +6,13 @@ import { Mdx } from '@/ui/codehike';
 import readme from './readme.mdx';
 import { data, Skill } from '@/app/_internal/data'
 
-// export async function generateMetadata(): Promise<Metadata> {
-//   const skill = data.learning_types.find(r => r.slug === 'character_practice')?.items.find(r => r.slug === 'similar-words') as Skill;
-//   return {
-//     title: skill.name,
-//     openGraph: { title: skill.name, images: [`/api/og?title=${skill.name}`] },
-//   };
-// }
+export async function generateMetadata(): Promise<Metadata> {
+  const skill = data.learning_types.find(r => r.slug === 'character_practice')?.items.find(r => r.slug === 'similar-words') as Skill;
+  return {
+    title: skill.name,
+    openGraph: { title: skill.name, images: [`/api/og?title=${skill.name}`] },
+  };
+}
 
 export const dynamic = 'force-dynamic';
 
