@@ -1,5 +1,18 @@
 {
+	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "character-sound-practice",
 	"main": ".open-next/worker.js",
-	"compatibility_date": "2026-01-24"
+	"compatibility_date": "2026-01-24",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".open-next/assets"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true
 }
