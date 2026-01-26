@@ -1,16 +1,14 @@
 import { notFound } from 'next/navigation';
-import { data, Lession, Character, Sound } from '@/app/_internal/data'
 import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
+import db from '@/lib/db';
 
 export function generateStaticParams() {
-  return data.character_learning_lessions.flatMap(lession =>
-    lession.characters.map(character => ({
-      lession: lession.slug,
-      character: character.id
-    }))
-  );
+  return db.character.findMany({}).filter((r) => r.lession.id !== '').map((character) => ({
+      lession: character.lession.slug,
+      character: character.id,
+    }));
 }
 
 export default async function Page({
@@ -19,7 +17,7 @@ export default async function Page({
   params: Promise<{ lession: string, character: string }>;
 }) {
   const { lession: lessionSlug, character: characterSlug } = await params;
-  const character: Character | undefined = data.character_learning_lessions.find(r => r.slug === lessionSlug)?.characters.find(r => r.id === characterSlug)
+  const character = db.character.find({where: {characterId: characterSlug}});
 
   if (!character) {
     notFound();

@@ -1,9 +1,10 @@
 import { Boundary } from '@/ui/boundary';
 import Link from 'next/link';
 import { LinkStatus } from '@/ui/link-status'
-import { data } from '@/app/_internal/data'
+import db from '@/lib/db';
 
 export default function Page() {
+  const learningTypes = db.learningType.findAll();
   return (
     <Boundary
       label="國小自學天地"
@@ -11,7 +12,7 @@ export default function Page() {
       kind="solid"
       className="flex flex-col gap-9"
     >
-      {data.learning_types.map((learning_types) => {
+      {learningTypes.map((learning_types) => {
         return (
           <div key={learning_types.name} className="flex flex-col gap-8">
             <div className="font-mono text-3xl font-semibold tracking-wider text-text-main uppercase">

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { Boundary } from '@/ui/boundary';
-import { Character, data } from '@/app/_internal/data'
+import db from '@/lib/db';
 
 export default async function Layout({
   params,
@@ -11,7 +11,7 @@ export default async function Layout({
   params: Promise<{ lession: string, character: string }>;
 }) {
   const { lession: lessionSlug, character: characterSlug } = await params;
-  const character: Character | undefined = data.character_learning_lessions.find(r => r.slug === lessionSlug)?.characters.find(r => r.id == characterSlug)
+  const character = db.character.find({where: {characterId: characterSlug}});
 
   if (!character) {
     notFound();

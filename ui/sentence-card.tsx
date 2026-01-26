@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Character, Sentence, Sound } from '@/app/_internal/data'
 import clsx from 'clsx';
+import { Sentence } from '@/lib/db';
 
 type SentenceType = 'flippable' | 'test'
 

@@ -1,12 +1,13 @@
 'use client';
 
-import { type Skill, type LearningType} from '@/app/_internal/data';
+import { LearningType, Skill } from '@/lib/db';
 import { LinkStatus } from '@/ui/link-status';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Suspense, useState } from 'react';
+
 
 export function GlobalNav({ items }: { items: LearningType[] }) {
   const [isOpen, setIsOpen] = useState(false);

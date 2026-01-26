@@ -5,10 +5,10 @@ import { Boundary } from '@/ui/boundary';
 import { type Metadata } from 'next';
 import { Mdx } from '@/ui/codehike';
 import readme from './readme.mdx';
-import { data, Skill } from '@/app/_internal/data'
+import db from '@/lib/db';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const skill = data.learning_types.find(r => r.slug === 'character_practice')?.items.find(r => r.slug === 'sound-radical-words') as Skill;
+  const skill = db.skill.find({where: { slug: 'sentences'}});
   return {
     title: skill.name,
     openGraph: { title: skill.name, images: [`/api/og?title=${skill.name}`] },
@@ -20,7 +20,7 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) { 
-  const skill = data.learning_types.find(r => r.slug === 'character_practice')?.items.find(r => r.slug === 'sentences') as Skill;
+  const skill = db.skill.find({where: { slug: 'sentences'}});
   return (
     <>
       <Boundary label='' kind="solid" animateRerendering={false}>

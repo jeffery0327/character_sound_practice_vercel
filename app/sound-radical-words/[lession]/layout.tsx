@@ -2,8 +2,7 @@
 
 import { notFound } from 'next/navigation';
 import { Boundary } from '@/ui/boundary';
-import { Tabs } from '@/ui/tabs';
-import { data, Lession } from '@/app/_internal/data'
+import db from '@/lib/db';
 
 export default async function Layout({
   params,
@@ -13,7 +12,7 @@ export default async function Layout({
   params: Promise<{ lession: string }>;
 }) {
   const { lession: lessionSlug } = await params;
-  const lession: Lession | undefined = data.character_learning_lessions.find(r => r.slug === lessionSlug)
+  const lession = db.lession.find({where: {slug: lessionSlug}});
 
   if (!lession) {
     notFound();

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Character, Sound } from '@/app/_internal/data'
 import clsx from 'clsx';
+import { CompletedCharacter, Sound } from '@/lib/db';
 
 type CardType = 'flippable' | 'fixed' | 'leader' | 'follower' | 'test'
 
@@ -10,7 +10,7 @@ export function CharacterCard({
   character,
   cardType = 'flippable'
 }: {
-  character: Character;
+  character: CompletedCharacter;
   cardType?: CardType
 }) {
   switch (cardType) {
@@ -27,7 +27,7 @@ export function CharacterCard({
   }
 }
 
-function FlippableCharacterCard({ characterInfo }: { characterInfo: Character }) {
+function FlippableCharacterCard({ characterInfo }: { characterInfo: CompletedCharacter }) {
   const [flipped, setFlipped] = useState(false);
   return (
     <div
@@ -81,7 +81,7 @@ function FlippableCharacterCard({ characterInfo }: { characterInfo: Character })
   )
 }
 
-function FixedHoverableOneSideCharacterCard({ characterInfo }: { characterInfo: Character }) {
+function FixedHoverableOneSideCharacterCard({ characterInfo }: { characterInfo: CompletedCharacter }) {
   return (
     <div className='flex flex-col gap-2 group hover:bg-primary p-1 bg-card rounded-lg min-h-40 border-2 border-orange-500 shadow-lg shadow-orange-500/50'>
       <div className='group group-hover:bg-primary rounded-lg bg-card flex-1 flex justify-between border-1 border-dashed border-gray-200 px-2'>
@@ -101,7 +101,7 @@ function FixedHoverableOneSideCharacterCard({ characterInfo }: { characterInfo: 
   )
 }
 
-function FixedOneSideCharacterCard({ characterInfo, isLeader = false }: { characterInfo: Character, isLeader?: boolean }) {
+function FixedOneSideCharacterCard({ characterInfo, isLeader = false }: { characterInfo: CompletedCharacter, isLeader?: boolean }) {
   return (
     <div className={clsx('flex flex-row items-stretch gap-2 p-1 bg-card rounded-lg min-h-40 border-2 shadow-lg', {
       'border-orange-500 shadow-orange-500/50': isLeader,
@@ -135,7 +135,7 @@ function FixedOneSideCharacterCard({ characterInfo, isLeader = false }: { charac
   )
 }
 
-function CardWithHeader({ characterInfo, isLeader = false }: { characterInfo: Character, isLeader?: boolean }) {
+function CardWithHeader({ characterInfo, isLeader = false }: { characterInfo: CompletedCharacter, isLeader?: boolean }) {
   return (
     <></>
   )

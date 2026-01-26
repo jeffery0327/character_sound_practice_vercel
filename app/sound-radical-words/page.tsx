@@ -2,12 +2,13 @@
 
 import { Boundary } from '@/ui/boundary';
 import Link from 'next/link';
-import { LinkStatus } from '@/ui/link-status'
-import { data } from '@/app/_internal/data'
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
+import db from '@/lib/db';
+import { LessionCard } from '@/ui/lession-card';
 
 export default async function Page() {
-
+  const lessions = db.lession.findMany({where: {}})
+  
   return (
     <Boundary label="課程">
       <div className="flex flex-col gap-4">
@@ -22,31 +23,16 @@ export default async function Page() {
           <h1 className="text-xl font-semibold text-text-main">
             All{' '}
             <span className="font-mono tracking-tighter">
-              ({data.character_learning_lessions.length})
+              ({lessions.length})
             </span>
           </h1>
         </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {data.character_learning_lessions.map((lession) => {
+          {lessions.map((lession) => {
             return (
-              <Link
-                href={`/sound-radical-words/${lession.slug}`}
-                key={lession.name}
-                className="group flex flex-col gap-1 rounded-lg bg-card px-5 py-3 hover:bg-primary"
-              >
-                <div className="flex items-center justify-between font-medium text-text-main group-hover:text-text-muted">
-                  {lession.name} <LinkStatus />
-                </div>
-
-                {lession.description ? (
-                  <div className="line-clamp-3 text-[13px] text-text-main group-hover:text-text-muted">
-                    {lession.description}
-                  </div>
-                ) : null}
-              </Link>
+              <LessionCard key={lession.id} lession={lession} baseUrl='/sound-radical-words' />
             )
           })}
-        
         </div>
       </div>
     </Boundary>

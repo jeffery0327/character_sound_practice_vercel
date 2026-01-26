@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
-import { data, Lession, Character, Sound } from '@/app/_internal/data'
 import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
+import db from '@/lib/db';
 
 export async function generateStaticParams() {
-  return data.character_learning_lessions.map(({ slug }) => ({ lession: slug }));
+  return db.lession.findMany({}).map(({ slug }) => ({ lession: slug }));
 }
 
 export default async function Page({
@@ -14,11 +14,13 @@ export default async function Page({
   params: Promise<{ lession: string }>;
 }) {
   const { lession: lessionSlug } = await params;
-  const lession: Lession | undefined = data.character_learning_lessions.find(r => r.slug === lessionSlug)
+  const lession = db.lession.find({where: {slug: lessionSlug}});
 
   if (!lession) {
     notFound();
   }
+
+  const characters = db.character.findMany({where: {lessionId: lession.id}});
 
   return (
     <div className="flex flex-col gap-4">
@@ -33,14 +35,14 @@ export default async function Page({
         <h1 className="text-xl font-semibold text-text-main">
           All{' '}
           <span className="font-mono tracking-tighter">
-            ({data.character_learning_lessions.length})
+            ({characters.length})
           </span>
         </h1>
       </div>
 
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {lession.characters.map((character: Character) => {
+        {characters.map((character) => {
           return (
             <Link
               href={`/similar-words/${lession.slug}/${character.id}`}

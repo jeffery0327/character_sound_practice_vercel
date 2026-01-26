@@ -2,7 +2,7 @@
 
 import { notFound } from 'next/navigation';
 import { Boundary } from '@/ui/boundary';
-import { data, SentenceLession } from '@/app/_internal/data'
+import db from '@/lib/db';
 
 export default async function Layout({
   params,
@@ -12,7 +12,7 @@ export default async function Layout({
   params: Promise<{ lession: string }>;
 }) {
   const { lession: lessionSlug } = await params;
-  const lession: SentenceLession | undefined = data.sentence_learning_lessions.find(r => r.slug === lessionSlug)
+  const lession = db.lession.find({where: {slug: lessionSlug}});
 
   if (!lession) {
     notFound();
