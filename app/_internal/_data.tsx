@@ -67,6 +67,17 @@ const learning_types: LearningType[] = [
         description: '靈活應用',
       },
     ],
+  },
+  {
+    slug: 'games',
+    name: '快樂學習',
+    items: [
+        {
+            slug: 'character-marathon',
+            name: '生字馬拉松',
+            description: '看你能跑多遠'
+        }
+    ]
   }
 ]
 const lessions: Lession[] = [
@@ -222,7 +233,7 @@ const sounds: Sound[] = [
     },
     {
         "id": "2",
-        "sound": "ㄧㄠˋ",
+        "sound": "ㄧㄠ",
         "words": [
             "要約",
             "要求",

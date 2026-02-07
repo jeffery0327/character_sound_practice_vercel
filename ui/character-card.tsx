@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { CompletedCharacter, Sound } from '@/lib/db';
+import { CompletedCharacter, Sound } from '@/lib/supabase/db';
+
+
 
 type CardType = 'flippable' | 'fixed' | 'leader' | 'follower' | 'test'
 
@@ -145,7 +147,7 @@ function SoundList({ sounds }: { sounds: Sound[] }) {
   return (
     <div className="rounded-lg flex flex-col gap-2 text-ms font-normal text-text-main">
       {sounds.map(item => (
-        <div key={item.sound} className="flex flex-row gap-3">
+        <div key={item.id} className="flex flex-row gap-3">
           <span className="shrink-0">({item.sound})</span>
           <span>{item.words.join('、')}</span>
         </div>

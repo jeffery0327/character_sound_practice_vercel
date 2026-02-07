@@ -4,11 +4,11 @@ import { notFound } from 'next/navigation';
 import { CharacterCard } from '@/ui/character-card'
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
-import db from '@/lib/db';
+import { findAllLessionPaths, findByLessionIdCompletedCharacters, findBySlugLession } from '@/lib/supabase/db';
 
 
 export async function generateStaticParams() {
-  return db.lession.findMany({}).map(({ slug }) => ({ lession: slug }));
+  return await findAllLessionPaths();
 }
 
 export default async function Page({
@@ -17,13 +17,12 @@ export default async function Page({
   params: Promise<{ lession: string }>;
 }) {
   const { lession: lessionSlug } = await params;
-  const lession = db.lession.find({where: {slug: lessionSlug}});
+  const lession =  await findBySlugLession(lessionSlug);
 
   if (!lession) {
     notFound();
   }
-
-  const characters = db.character.findMany({where: {lessionId: lession.id}});
+  const characters = (await findByLessionIdCompletedCharacters(lession.id));
 
   return (
     <div className="flex flex-col gap-4">

@@ -1,6 +1,6 @@
-import { Lession } from "@/lib/db";
 import Link from "next/link";
 import { LinkStatus } from "./link-status";
+import { Lession } from "@/lib/supabase/db";
 
 export function LessionCard({
   lession,

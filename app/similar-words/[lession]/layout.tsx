@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Boundary } from '@/ui/boundary';
-import db from '@/lib/db';
+import { findBySlugLession } from '@/lib/supabase/db';
 
 export default async function Layout({
   params,
@@ -10,7 +10,7 @@ export default async function Layout({
   params: Promise<{ lession: string }>;
 }) {
   const { lession: lessionSlug } = await params;
-  const lession = db.lession.find({where: {slug: lessionSlug}});
+  const lession = await findBySlugLession(lessionSlug);
 
   if (!lession) {
     notFound();

@@ -3,11 +3,11 @@
 import { Boundary } from '@/ui/boundary';
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
-import db from '@/lib/db';
 import { LessionCard } from '@/ui/lession-card';
+import { findAllLessions } from '@/lib/supabase/db';
 
 export default async function Page() {
-  const lessions = db.lession.findMany({ where: {} })
+  const lessions = await findAllLessions();
 
   return (
     <Boundary label="課程">

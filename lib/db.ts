@@ -27,6 +27,9 @@ type SentenceFindOption = { where?: SentenceWhere, limit?: number }
 type CharacterWhere = { lessionId?: string, characterId?: string }
 type CharacterFindOption = { where?: CharacterWhere, limit?: number }
 
+type SoundWhere = { soundId?: string }
+type SoundFindOption = { where?: SoundWhere, limit?: number }
+
 
 export type CompletedCharacter = {
   id: string;
@@ -165,7 +168,18 @@ const db = {
 
       return completedCharacters;
     },
-  }
+  },
+  "sound": {
+    findMany: (options: SoundFindOption) => {
+      let sounds = data.sounds;
+
+      if (options.where?.soundId != undefined) {
+        sounds = sounds.filter((s) => s.id === options.where?.soundId);
+      }
+
+      return sounds;
+    }
+  },
 }
 
 export default db;

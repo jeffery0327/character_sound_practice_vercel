@@ -2,13 +2,10 @@ import { notFound } from 'next/navigation';
 import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
-import db from '@/lib/db';
+import { findAllCompletedCharacterPaths, findAllCompletedCharacters, findByIdCompletedCharacters } from '@/lib/supabase/db';
 
-export function generateStaticParams() {
-  return db.character.findMany({}).filter((r) => r.lession.id !== '').map((character) => ({
-      lession: character.lession.slug,
-      character: character.id,
-    }));
+export async function generateStaticParams() {
+  return await findAllCompletedCharacterPaths();
 }
 
 export default async function Page({
@@ -17,7 +14,7 @@ export default async function Page({
   params: Promise<{ lession: string, character: string }>;
 }) {
   const { lession: lessionSlug, character: characterSlug } = await params;
-  const character = db.character.find({where: {characterId: characterSlug}});
+  const character = await findByIdCompletedCharacters(Number(characterSlug));
 
   if (!character) {
     notFound();

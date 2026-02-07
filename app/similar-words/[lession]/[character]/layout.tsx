@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { Boundary } from '@/ui/boundary';
-import db from '@/lib/db';
+import { findByIdCompletedCharacters } from '@/lib/supabase/db';
 
 export default async function Layout({
   params,
@@ -11,7 +11,7 @@ export default async function Layout({
   params: Promise<{ lession: string, character: string }>;
 }) {
   const { lession: lessionSlug, character: characterSlug } = await params;
-  const character = db.character.find({where: {characterId: characterSlug}});
+  const character = await findByIdCompletedCharacters(Number(characterSlug));
 
   if (!character) {
     notFound();

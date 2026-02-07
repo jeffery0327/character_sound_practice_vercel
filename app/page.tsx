@@ -18,7 +18,6 @@ export default function Page() {
             <div className="font-mono text-3xl font-semibold tracking-wider text-text-main uppercase">
               {learning_types.name}
             </div>
-
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
               {learning_types.items.map((item) => {
                 return (

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Sentence } from '@/lib/db';
+import { Sentence } from '@/lib/supabase/db';
 
 type SentenceType = 'flippable' | 'test'
 
