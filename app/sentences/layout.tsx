@@ -1,4 +1,4 @@
-// 'use cache';
+'use cache';
 
 import React from 'react';
 import { Boundary } from '@/ui/boundary';
@@ -6,6 +6,7 @@ import { type Metadata } from 'next';
 import { Mdx } from '@/ui/codehike';
 import readme from './readme.mdx';
 import db from '@/lib/db';
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const skill = db.skill.find({where: { slug: 'sentences'}});

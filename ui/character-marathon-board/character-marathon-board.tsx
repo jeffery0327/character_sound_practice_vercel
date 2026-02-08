@@ -2,11 +2,11 @@
 
 import { MouseEventHandler, useEffect, useMemo, useReducer, useState } from 'react';
 import clsx from 'clsx';
-import { CompletedCharacter, Sound } from '@/lib/db';
 import { gameReducer } from '@/ui/character-marathon-board/gameReducer';
 import { GameResult, Score } from '@/ui/character-marathon-board/types'
 import { createInitialState, createQuestion, getOptionType } from './gameEngine';
 import { GameBoard } from '../game-board';
+import { CompletedCharacter, Sound } from '@/lib/supabase/db';
 
 export function CharacterMarathonBoard({
   characters,

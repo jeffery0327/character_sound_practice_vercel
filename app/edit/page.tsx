@@ -1,4 +1,4 @@
-'use cache';
+// 'use cache';
 
 import { Boundary } from '@/ui/boundary';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { findAllLessions } from '@/lib/supabase/db';
 
 export default async function Page() {
   const lessions = await findAllLessions();
-
+  
   return (
     <Boundary label="課程">
       <div className="flex flex-col gap-4">
@@ -30,7 +30,7 @@ export default async function Page() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {lessions.map((lession) => {
             return (
-              <LessionCard key={lession.id} lession={lession} baseUrl='/sentences' />
+              <LessionCard key={lession.id} lession={lession} baseUrl='/sound-radical-words' />
             )
           })}
         </div>

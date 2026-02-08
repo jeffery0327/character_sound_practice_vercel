@@ -1,10 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
-import { Database } from './database.types'
-import { env } from '../env'
+import { Database } from '@/lib/supabase/database.types'
 
 const supabase = createClient<Database>(
-  env.SUPABASE_URL,
-  env.SUPABASE_ANON_KEY
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
           

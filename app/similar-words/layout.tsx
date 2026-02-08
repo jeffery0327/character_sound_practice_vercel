@@ -34,7 +34,9 @@ export default async function Layout({
         animateRerendering={false}
         className="flex flex-col gap-9"
       >
-        {children}
+        <Suspense fallback={<div>Loading runtime data...</div>}>
+          {children}
+        </Suspense>
       </Boundary>
     </>
   );

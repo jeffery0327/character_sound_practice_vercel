@@ -1,6 +1,6 @@
 // 'use cache';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Boundary } from '@/ui/boundary';
 import { type Metadata } from 'next';
 import { Mdx } from '@/ui/codehike';
@@ -32,7 +32,7 @@ export default async function Layout({
         animateRerendering={false}
         className="flex flex-col gap-5"
       >
-        {children}
+        <Suspense fallback={<div>Loading runtime data...</div>}>{children}</Suspense>
       </Boundary>
     </>
   );

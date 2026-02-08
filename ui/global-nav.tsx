@@ -8,38 +8,48 @@ import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Suspense, useState } from 'react';
 
-
-export function GlobalNav({ items }: { items: LearningType[] }) {
+export function GlobalNav({
+  items,
+  auth,
+}: {
+  items: LearningType[];
+  auth: React.ReactNode;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const close = () => setIsOpen(false);
 
   return (
     <>
-      <div className="flex h-14 items-center px-4 py-4 lg:h-auto">
+      <div className="flex h-14 items-center justify-between px-4 py-4 lg:h-auto">
         <Link
           href="/"
-          className="group flex w-full items-center gap-x-2.5"
+          className="group flex-none items-center gap-x-2.5"
           onClick={close}
         >
           <h3 className="text-lg font-medium text-text-main group-hover:text-white">
             首頁
           </h3>
         </Link>
-      </div>
-      <button
-        type="button"
-        className="group absolute top-0 right-0 flex h-14 items-center gap-x-2 px-4 lg:hidden"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <div className="font-medium text-text-muted group-hover:text-text-muted">
-          Menu
+        <div className="grow justify-end">
+          {auth}
         </div>
-        {isOpen ? (
-          <XMarkIcon className="block w-6 text-text-muted" />
-        ) : (
-          <Bars3Icon className="block w-6 text-text-muted" />
-        )}
-      </button>
+        <button
+          type="button"
+          className="group flex-none h-14 items-center gap-x-2 px-4 lg:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {/* <div className="font-medium text-text-muted group-hover:text-text-muted">
+            Menu
+          </div> */}
+          {isOpen ? (
+            <XMarkIcon className="block w-6 text-text-muted" />
+          ) : (
+            <Bars3Icon className="block w-6 text-text-muted" />
+          )}
+        </button>
+      </div>
+
+
 
       <div
         className={clsx('overflow-y-auto lg:static lg:block', {

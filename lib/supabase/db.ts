@@ -1,5 +1,5 @@
 import { QueryData } from "@supabase/supabase-js"
-import { supabase } from "./server"
+import { supabasePublic } from "@/lib/supabase/public"
 
 export type Skill = {
   slug: string;
@@ -108,8 +108,14 @@ export async function findByLessionIdSentences(lessionId: number) {
   return transferToSentence(data);
 }
 
+export async function findAllSounds() {
+  const { data, error } = await getBaseSoundsQuery();
+  if (error) throw error;
+  return transferToSound(data);
+}
+
 function getBaseCompletedCharactersQuery() {
-  return supabase.from('characters').select(`
+  return supabasePublic.from('characters').select(`
     id,
     character,
     radical,
@@ -143,7 +149,7 @@ const baseCompletedCharactersQuery = getBaseCompletedCharactersQuery();
 
 
 function getBaseLessionsQuery() {
-  return supabase.from('lessions').select(`
+  return supabasePublic.from('lessions').select(`
     id,
     slug,
     name,
@@ -154,7 +160,7 @@ function getBaseLessionsQuery() {
 const baseLessionsQuery = getBaseLessionsQuery();
 
 function getBaseSentencesQuery() {
-  return supabase.from('sentences').select(`
+  return supabasePublic.from('sentences').select(`
     id,
     lession,
     format,
@@ -162,6 +168,15 @@ function getBaseSentencesQuery() {
   `);
 }
 const baseSentencesQuery = getBaseSentencesQuery();
+
+function getBaseSoundsQuery() {
+  return supabasePublic.from('sounds').select(`
+    id,
+    sound,
+    words
+  `);
+}
+const baseSoundsQuery = getBaseSoundsQuery();
 
 
 
@@ -234,4 +249,15 @@ function transferToSentence(data: QueryData<typeof baseSentencesQuery>): Sentenc
     }
   })
   return sentences;
+}
+
+function transferToSound(data: QueryData<typeof baseSoundsQuery>): Sound[] {
+  const sounds: Sound[] = data.map(sound => {
+    return {
+      id: sound.id,
+      sound: sound.sound,
+      words: sound.words?.split(',') ?? [],
+    }
+  })
+  return sounds;
 }

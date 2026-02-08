@@ -3,12 +3,12 @@
 import { Boundary } from '@/ui/boundary';
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
-import db, { Character } from '@/lib/db';
 import { CharacterMarathonBoard } from '@/ui/character-marathon-board/character-marathon-board';
+import { findAllCompletedCharacters, findAllSounds } from '@/lib/supabase/db';
 
 export default async function Page() {
-  const characters = db.character.findMany({ where: {} });
-  const sounds = db.sound.findMany({ where: {} });
+  const characters = await findAllCompletedCharacters();
+  const sounds = await findAllSounds();
 
   return (
     <Boundary label="生字馬拉松">

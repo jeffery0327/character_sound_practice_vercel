@@ -1,4 +1,5 @@
-import { CompletedCharacter, Sound } from "@/lib/db";
+import { CompletedCharacter, Sound } from "@/lib/supabase/db";
+
 
 export type GameState = {
   question: CompletedCharacter;

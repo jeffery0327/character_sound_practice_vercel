@@ -1,4 +1,5 @@
-import { CompletedCharacter, Sound } from '@/lib/db';
+
+import { CompletedCharacter, Sound } from '@/lib/supabase/db';
 import { GameState } from '@/ui/character-marathon-board/types'
 
 export function createQuestion(

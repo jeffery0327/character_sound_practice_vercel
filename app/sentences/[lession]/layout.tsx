@@ -1,8 +1,9 @@
-// 'use cache';
+'use cache';
 
 import { notFound } from 'next/navigation';
 import { Boundary } from '@/ui/boundary';
 import { findBySlugLession } from '@/lib/supabase/db';
+import { Suspense } from 'react';
 
 export default async function Layout({
   params,
@@ -20,7 +21,9 @@ export default async function Layout({
 
   return (
     <Boundary label={lession.name} className="flex flex-col gap-9">
-      <div>{children}</div>
+      <Suspense>
+        {children}
+      </Suspense>
     </Boundary>
   );
 }

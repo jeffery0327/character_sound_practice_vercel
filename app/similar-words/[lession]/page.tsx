@@ -2,11 +2,10 @@ import { notFound } from 'next/navigation';
 import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
-import { findAllLessions, findByLessionIdCompletedCharacters, findBySlugLession } from '@/lib/supabase/db';
+import { findAllLessionPaths, findByLessionIdCompletedCharacters, findBySlugLession } from '@/lib/supabase/db';
 
 export async function generateStaticParams() {
-  const lessions = await findAllLessions();
-  return lessions.map(({ slug }) => ({ lession: slug }));
+  return await findAllLessionPaths();
 }
 
 export default async function Page({

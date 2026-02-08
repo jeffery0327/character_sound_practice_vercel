@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { CharacterCard } from '@/ui/character-card'
 import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
-import { findAllCompletedCharacterPaths, findAllCompletedCharacters, findByIdCompletedCharacters } from '@/lib/supabase/db';
+import { findAllCompletedCharacterPaths, findByIdCompletedCharacters } from '@/lib/supabase/db';
 
 export async function generateStaticParams() {
   return await findAllCompletedCharacterPaths();

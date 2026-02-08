@@ -5,6 +5,8 @@ import { GlobalNav } from '@/ui/global-nav';
 import { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import db from '@/lib/db'
+import { AuthButton } from '@/ui/login-form/auth-button';
+import { Suspense } from 'react';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 
@@ -39,7 +41,9 @@ export default function RootLayout({
         className={`overflow-y-scroll bg-bg font-sans ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-primary lg:bottom-0 lg:z-auto lg:w-72 lg:border-r lg:border-b-0 lg:border-gray-800">
-          <GlobalNav items={learningTypes} />
+          <Suspense>
+            <GlobalNav items={learningTypes} auth={<AuthButton/>} />
+          </Suspense>
         </div>
         <div className="lg:pl-72 lg:pt-0 pt-10">
           <div className="mx-auto mt-12 mb-24 max-w-8xl -space-y-[1px] lg:px-8 lg:py-8">
