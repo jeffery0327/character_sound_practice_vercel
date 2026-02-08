@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { LinkStatus } from '@/ui/link-status'
 import db from '@/lib/db';
 import { Suspense } from 'react';
-import { UserGate } from '@/ui/user-gate';
 
 export default async function Page() {
 
@@ -50,31 +49,22 @@ export default async function Page() {
                       <span style={{ color: "#999" }}>載入中...</span>
                     }
                   >
-                    <UserGate
-                      fallback={
-                        <span
-                          style={{ color: "#999", cursor: "not-allowed" }}
-                        >
-                          登入後進入
-                        </span>
-                      }
+                    <Link
+                      href={`/${item.slug}`}
+                      key={item.slug}
+                      className="group flex flex-col gap-1 rounded-lg bg-card px-5 py-3 hover:bg-primary "
                     >
-                      <Link
-                        href={`/${item.slug}`}
-                        key={item.slug}
-                        className="group flex flex-col gap-1 rounded-lg bg-card px-5 py-3 hover:bg-primary "
-                      >
-                        <div className="flex items-center justify-between font-medium text-text-main group-hover:text-text-muted">
-                          {item.name} <LinkStatus />
-                        </div>
+                      <div className="flex items-center justify-between font-medium text-text-main group-hover:text-text-muted">
+                        {item.name} <LinkStatus />
+                      </div>
 
-                        {item.description ? (
-                          <div className="line-clamp-3 text-[13px] text-text-muted group-hover:text-text-muted">
-                            {item.description}
-                          </div>
-                        ) : null}
-                      </Link>
-                    </UserGate>
+                      {item.description ? (
+                        <div className="line-clamp-3 text-[13px] text-text-muted group-hover:text-text-muted">
+                          {item.description}
+                        </div>
+                      ) : null}
+                    </Link>
+
                   </Suspense>
 
                 );
