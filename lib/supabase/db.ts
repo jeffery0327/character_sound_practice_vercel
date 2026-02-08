@@ -1,5 +1,5 @@
 import { QueryData } from "@supabase/supabase-js"
-import { supabasePublic } from "@/lib/supabase/public"
+import { createClient } from "@/lib/supabase/client"
 
 export type Skill = {
   slug: string;
@@ -115,7 +115,7 @@ export async function findAllSounds() {
 }
 
 function getBaseCompletedCharactersQuery() {
-  return supabasePublic.from('characters').select(`
+  return createClient().from('characters').select(`
     id,
     character,
     radical,
@@ -149,7 +149,7 @@ const baseCompletedCharactersQuery = getBaseCompletedCharactersQuery();
 
 
 function getBaseLessionsQuery() {
-  return supabasePublic.from('lessions').select(`
+  return createClient().from('lessions').select(`
     id,
     slug,
     name,
@@ -160,7 +160,7 @@ function getBaseLessionsQuery() {
 const baseLessionsQuery = getBaseLessionsQuery();
 
 function getBaseSentencesQuery() {
-  return supabasePublic.from('sentences').select(`
+  return createClient().from('sentences').select(`
     id,
     lession,
     format,
@@ -170,7 +170,7 @@ function getBaseSentencesQuery() {
 const baseSentencesQuery = getBaseSentencesQuery();
 
 function getBaseSoundsQuery() {
-  return supabasePublic.from('sounds').select(`
+  return createClient().from('sounds').select(`
     id,
     sound,
     words
