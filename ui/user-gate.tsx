@@ -8,10 +8,19 @@ export async function UserGate({
   children: React.ReactNode;
   fallback: React.ReactNode;
 }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  try {
+    const supabase = await createClient();
+    // getUser 是目前最安全的作法，避免 JWT 偽造
+    const { data: { user }, error } = await supabase.auth.getUser();
 
-  return user ? children : fallback;
+    if (error || !user) {
+      console.log("UserGate: No user found", error);
+      return <>{fallback}</>;
+    }
+
+    return <>{children}</>;
+  } catch (e) {
+    console.error("UserGate crashed:", e);
+    return <>{fallback}</>;
+  }
 }
